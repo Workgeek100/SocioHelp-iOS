@@ -26,7 +26,7 @@ userSignIn=(emailId,password)=>{
     .catch(error=>{
         var error = error.code 
         var errorMessage = error.message
-        return Alert.alert(alertMessage)
+        return Alert.alert(errorMessage)
     })
 }
 

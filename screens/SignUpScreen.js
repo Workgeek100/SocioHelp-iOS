@@ -10,9 +10,9 @@ export default class SignUpScreen extends React.Component{
     constructor(){
         super()
         this.state = {
-            emailId: '',
-            password : '',
-            confirmPassword : '',
+            emailId: ' ',
+            password : ' ', 
+            confirmPassword : ' ',
             
         }
     }
@@ -24,6 +24,9 @@ export default class SignUpScreen extends React.Component{
         else{
         firebase.auth().createUserWithEmailAndPassword(emailId,password)
         .then(response=>{
+            db.collection("users").add({
+                email_id : this.state.emailId,
+            })
             this.props.navigation.navigate("SignIn")
             return Alert.alert("User Added Successfully")
         })
@@ -91,7 +94,7 @@ export default class SignUpScreen extends React.Component{
                 <TouchableOpacity 
                 style = {styles.button}
                 onPress={()=>{
-                    this.userSignUp(this.state.emailId,this.state.password)
+                    this.userSignUp(this.state.emailId,this.state.password, this.state.confirmPassword)
                     this.setState({
                         emailId:"",
                         password:'',
@@ -106,7 +109,7 @@ export default class SignUpScreen extends React.Component{
                     this.props.navigation.navigate("SignIn")
                 }}>
                     <Text style = {styles.buttonText}>Already Registered? Sign in here</Text>
-                    <AntDesign name="leftcircle" size={40} color="#black" />
+                    <AntDesign name="leftcircle" size={RFValue(40)} color="#black" />
                 </TouchableOpacity>
             </View>
         )

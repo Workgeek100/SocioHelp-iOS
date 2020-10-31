@@ -55,7 +55,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button1}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("AadharCard")
                 }}>
                     <Text style = {styles.buttonText}>AADHAR Card</Text>
                     <Image 
@@ -66,7 +66,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style ={styles.button10}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("PanCard")
                 }}>
                     <Text style = {styles.buttonText}>PAN Card</Text>
                     <Image
@@ -77,7 +77,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button2}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Passport")
                 }}>
                     <Text style = {styles.buttonText}>Passport</Text>
                     <Image 
@@ -88,7 +88,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button8}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Education")
                 }}>
                     <Text style = {styles.buttonText}>Education</Text>
                     <Image 
@@ -98,7 +98,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button9}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Automobiles")
                 }}>
                     <Text style = {styles.buttonText}>Automobiles</Text>
                     <Image 
@@ -109,7 +109,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button11}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Travel")
                 }}>
                     <Text style = {styles.buttonText}>Travel & Tourism</Text>
                     <Image 
@@ -120,7 +120,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button12}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Film")
                 }}>
                     <Text style = {styles.buttonText}>Film & Entertainment</Text>
                     <Image 
@@ -131,7 +131,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button13}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Sports")
                 }}>
                     <Text style = {styles.buttonText}>Sports</Text>
                     <Image 
@@ -142,7 +142,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button14}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Electronics")
                 }}>
                     <Text style = {styles.buttonText}>Electronics</Text>
                     <Image 
@@ -153,7 +153,7 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button15}
                 onPress={()=>{
-
+                    this.props.navigation.navigate("Food")
                 }}>
                     <Text style = {{fontWeight:'bold',color:"#fff",fontSize:RFValue(15),fontStyle:'italic',alignItems:'center',}}>Food & Dine-out</Text>
                     <Image 

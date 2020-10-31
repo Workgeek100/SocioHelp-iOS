@@ -61,7 +61,7 @@ componentDidMount(){
                         this.state.licenseBlogs.length===0
                         ?(
                             <View>
-                                <Text>No Blogs Available</Text>
+                                <Text style = {styles.buttonText}>No Blogs Available</Text>
                             </View>    
                         )
                         :(
@@ -78,7 +78,7 @@ componentDidMount(){
                 onPress={()=>{
                     this.props.navigation.navigate("Forum")
                 }}>
-                    <Text>Back to Home</Text>
+                    <Text style = {styles.buttonText}>Back to Home</Text>
                     <FontAwesome name="home" size={50} color="black" />
                 </TouchableOpacity>
             </View>

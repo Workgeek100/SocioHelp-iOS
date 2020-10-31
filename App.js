@@ -17,6 +17,7 @@ import TravelScreen from './screens/TravelScreen';
 import FilmScreen from './screens/FilmScreen';
 import SportsScreen from './screens/SportsScreen';
 import ElectronicsScreen from './screens/ElectronicsScreen';
+import FoodScreen from './screens/FoodScreen';
 
 export default class App extends React.Component { 
   render(){
@@ -45,6 +46,7 @@ const AppNavigator = createSwitchNavigator({
   Film : {screen : FilmScreen},
   Sports : {screen : SportsScreen},
   Electronics : {screen : ElectronicsScreen},
+  Food : {screen : FoodScreen},
 })
 
 const AppContainer = createAppContainer(AppNavigator)

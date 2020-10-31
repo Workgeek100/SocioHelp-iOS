@@ -19,27 +19,6 @@ constructor(){
     }
 }
 
-submitProblem=(userName,topic,matter,category)=>{
-    if(userName===''||topic===''||matter===''||category===''){
-        return Alert.alert("Please fill out all the fields.")
-    }
-    else{
-        db.collection().add({
-            user_name : this.state.userName,
-            category : this.state.category,
-            subject : this.state.topic,
-            matter : this.state.matter,
-        })
-        this.setState({
-            userName : '',
-            topic : '',
-            matter : '',
-            category : '',
-        })
-        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
-    }
-}
-
 submitIntoSeparateCollection = (userName,topic,matter,category)=>{
     if(userName===''||topic===''||matter===''||category===''){
         return Alert.alert("Please fill out all the fields.")
@@ -83,6 +62,60 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
     }
     else if(this.state.category==="Education"){
         db.collection("education_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Automobiles"){
+        db.collection("automobiles_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Travel & Tourism"){
+        db.collection("travel_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Film & Entertainment"){
+        db.collection("film_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Sports"){
+        db.collection("sports_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Food & Dine-out"){
+        db.collection("food_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            subject : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Others"){
+        db.collection("others_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             subject : this.state.topic,

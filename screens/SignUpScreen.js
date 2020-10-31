@@ -37,6 +37,10 @@ export default class SignUpScreen extends React.Component{
         })
     }
 }
+
+_updateMasterState = (attrName, value) => {
+    this.setState({ [attrName]: value });
+  }
     render(){
         return(
             <View style = {styles.container}>

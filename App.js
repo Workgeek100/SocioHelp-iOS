@@ -18,6 +18,8 @@ import FilmScreen from './screens/FilmScreen';
 import SportsScreen from './screens/SportsScreen';
 import ElectronicsScreen from './screens/ElectronicsScreen';
 import FoodScreen from './screens/FoodScreen';
+import IntroScreen from './screens/IntroScreen'
+import EnterScreen from './screens/EnterScreen';
 
 export default class App extends React.Component { 
   render(){
@@ -31,6 +33,8 @@ export default class App extends React.Component {
 }
 
 const AppNavigator = createSwitchNavigator({
+  Intro : {screen : IntroScreen},
+  Enter : {screen : EnterScreen},
   SignIn : {screen : SignInScreen},
   SignUp : {screen : SignUpScreen},
   Forum : {screen : ForumScreen},

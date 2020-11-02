@@ -8,13 +8,14 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import {ListItem, Item} from 'react-native-elements';
 import PostYourTopicScreen from './PostYourTopicScreen';
+import { AntDesign } from '@expo/vector-icons';
 
 export default class DrivingLicenseScreen extends React.Component {
 constructor(props){
     super(props)
     this.state = {
         licenseBlogs : [],
-        category : "Driving License"
+        category : "Driving License",
     }
     this.blogRef = null
 }
@@ -37,12 +38,20 @@ renderItem = ({item,i})=>{
     title = {item.category}
     subtitle = {item.subject}
     titleStyle = {styles.titleStyle}
-    bottomDivider
-    />
+    rightElement = {
+        <TouchableOpacity>
+            <AntDesign name="right" size={24} color="black" />
+        </TouchableOpacity>
+    }>
+    </ListItem>
 }
 
 componentDidMount(){
     this.getAllBlogs()
+}
+
+componentWillUnmount(){
+    this.blogRef()
 }
 
     render(){

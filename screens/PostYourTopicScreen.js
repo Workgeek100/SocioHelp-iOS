@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {TouchableOpacity, Text, View, TextInput, StyleSheet, FlatList, Image, Alert} from 'react-native';
-import {Badge, Icon, Header} from 'react-native-elements';
+import {Badge, Icon, Header, Input} from 'react-native-elements';
 import firebase from 'firebase';
 import db from '../config';
 import {RFValue} from 'react-native-responsive-fontsize';
 import { Dropdown } from 'react-native-material-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class PostYourTopicScreen extends React.Component {
 constructor(){
@@ -28,7 +29,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("license_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -37,7 +38,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("pan_card_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -46,7 +47,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("aadhar_card_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -55,7 +56,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("passport_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -64,7 +65,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("education_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -73,7 +74,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("automobiles_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -82,7 +83,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("travel_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -91,7 +92,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("film_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -100,7 +101,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("sports_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -109,7 +110,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("food_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -118,7 +119,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
         db.collection("others_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
-            subject : this.state.topic,
+            topic : this.state.topic,
             matter : this.state.matter,
         })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
@@ -161,13 +162,14 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 }}
                 />
                 <Text style = {styles.text}>Name</Text>
-                <TextInput 
+                <Input 
                 style = {styles.inputBox}
                 placeholder = {"Your Name*"}
                 placeholderTextColor = {'black'}
                 clearButtonMode = {"while-editing"}
                 autoCorrect = {false}
                 autoCapitalize = {'words'}
+                leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
                 onChangeText={(text)=>{
                     this.setState({
                         userName:text
@@ -175,7 +177,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 }}
                 />
                 <Text style = {styles.text}>Topic</Text>
-                <TextInput 
+                <Input 
                 style = {styles.inputBox}
                 placeholder = {"Topic*"}
                 placeholderTextColor = {'black'}
@@ -189,7 +191,7 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 }}
                 />
                 <Text style = {styles.text}>Matter</Text>
-                <TextInput 
+                <Input 
                 style = {styles.inputBox2}
                 placeholder = {"Matter*"}
                 placeholderTextColor = {'black'}

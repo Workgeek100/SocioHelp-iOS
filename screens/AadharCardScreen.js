@@ -1,5 +1,5 @@
 import * as React from "react";
-import {TouchableOpacity,Text,View,TextInput,StyleSheet,FlatList,Image,Alert,KeyboardAvoidingView} from "react-native";
+import {TouchableOpacity,ActivityIndicator,Text,View,TextInput,StyleSheet,FlatList,Image,Alert,KeyboardAvoidingView} from "react-native";
 import { Badge, Icon, Header, ListItem, Input } from "react-native-elements";
 import firebase from "firebase";
 import db from "../config";
@@ -12,8 +12,10 @@ export default class AadharCardScreen extends React.Component {
     super();
     this.state = {
       aadharBlogs: [],
-      category: "AADHAR Card"
+      category: "AADHAR Card",
+      isLoading : false,
     };
+    this.blogRef = null;
   }
 
   getAllBlogs = () => {
@@ -23,7 +25,8 @@ export default class AadharCardScreen extends React.Component {
       .onSnapshot(snapshot => {
         var aadharBlogs = snapshot.docs.map(document => document.data());
         this.setState({
-          aadharBlogs: aadharBlogs
+          aadharBlogs: aadharBlogs,
+          isLoading : true,
         });
       });
   };
@@ -33,12 +36,12 @@ export default class AadharCardScreen extends React.Component {
   renderItem = ({ item, i }) => (
     <TouchableOpacity
     onPress = {()=>{
-      this.props.navigation.navigate("Data")
+      this.props.navigation.navigate("AadharData",{data:item})
     }}>
     <ListItem
       key={i}
       title={item.topic}
-      subtitle={item.matter}
+      subtitle={item.matter .split('').splice(0,100).join('') + '.....'}
       titleStyle={styles.titleStyle}
       containerStyle = {styles.list}
       bottomDivider
@@ -51,6 +54,7 @@ export default class AadharCardScreen extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading){
     return (
       <View style={styles.container}>
         <Header
@@ -89,6 +93,15 @@ export default class AadharCardScreen extends React.Component {
         </TouchableOpacity>
       </View>
     );
+        }
+        else{
+          return(
+            <View style = {{flex:1,backgroundColor:"#222831",alignItems:'center',justifyContent : 'center'}}>
+                <ActivityIndicator size =  "large" color = "red"/>
+                <Text style = {{fontSize : RFValue(100)}}>Is Loading....</Text>
+            </View>
+        )
+        }
   }
 }
 

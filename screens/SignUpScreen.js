@@ -2,9 +2,11 @@ import * as React from 'react';
 import {Text, View, TouchableOpacity, TextInput, StyleSheet, Alert, ScrollView, Modal} from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AntDesign } from '@expo/vector-icons';
-import {Header, Icon, Badge} from 'react-native-elements';
+import {Header, Icon, Badge, Input} from 'react-native-elements';
 import firebase from 'firebase';
 import db from '../config';
+import { Zocial } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'
 
 export default class SignUpScreen extends React.Component{
     constructor(){
@@ -38,9 +40,6 @@ export default class SignUpScreen extends React.Component{
     }
 }
 
-_updateMasterState = (attrName, value) => {
-    this.setState({ [attrName]: value });
-  }
     render(){
         return(
             <View style = {styles.container}>
@@ -48,16 +47,18 @@ _updateMasterState = (attrName, value) => {
                     backgroundColor = {"#00adb5"}
                     containerStyle = {styles.header}
                     centerComponent={{
-                        text:'Sign up here',
-                       style : {flex:1, color : "#fff", fontWeight:'bold',fontStyle : 'italic', fontSize : RFValue(25)}
+                        text:'Create an Account',
+                       style : {flex:1, color : "#fff", fontWeight:'bold',fontStyle : 'italic', fontSize : RFValue(30)}
                     }}
                     />
-                <TextInput
-                style = {styles.inputBox}
+                <Input
+                containerStyle = {styles.inputBox}
                 placeholder = {"Email-ID"}
                 placeholderTextColor = {'#393e46'}
                 clearButtonMode = {"while-editing"}
                 autoCorrect = {false}
+                leftIconContainerStyle = {styles.emailIcon}
+                leftIcon = {<Zocial name="email" size={30} color="#393e46" />}
                 keyboardType = {"email-address"}
                 allowFontScaling = {true}
                 autoCapitalize = {"none"}
@@ -67,13 +68,15 @@ _updateMasterState = (attrName, value) => {
                     })
                 }}
                />
-               <TextInput
-               style = {styles.inputBox}
+               <Input
+               containerStyle = {styles.inputBox}
                placeholder = {'Enter Password'}
                clearButtonMode = {'while-editing'}
                placeholderTextColor = {'#393e46'}
                autoCorrect = {false}
                secureTextEntry = {true}
+               leftIconContainerStyle = {styles.passwordIcon}
+               leftIcon = {<FontAwesome name="lock" size={35} color="#393e46" />}
                autoCapitalize = {"none"}
                onChangeText = {(text)=>{
                   this.setState({
@@ -81,14 +84,16 @@ _updateMasterState = (attrName, value) => {
                })
                }}
                />
-               <TextInput
-               style = {styles.inputBox}
+               <Input
+               containerStyle = {styles.inputBox}
                placeholder = {'Confirm Password'}
                placeholderTextColor = {'#393e46'}
                autoCapitalize = {"none"}
                autoCorrect = {false}
                clearButtonMode = {"while-editing"}
                secureTextEntry = {true}
+               leftIconContainerStyle = {styles.passwordIcon}
+               leftIcon = {<FontAwesome name="lock" size={35} color="#393e46" />}
                onChangeText = {(text)=>{
                     this.setState({
                        confirmPassword:text
@@ -96,7 +101,7 @@ _updateMasterState = (attrName, value) => {
                }}
                />
                 <TouchableOpacity 
-                style = {styles.button}
+                style = {styles.button2}
                 onPress={()=>{
                     this.userSignUp(this.state.emailId,this.state.password, this.state.confirmPassword)
                     this.setState({
@@ -105,14 +110,14 @@ _updateMasterState = (attrName, value) => {
                         confirmPassword:'',
                     })
                 }}>
-                    <Text style = {styles.buttonText}>Sign Up</Text>
+                    <Text style = {styles.buttonText}>CREATE ACCOUNT</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                 style = {styles.button}
                 onPress = {()=>{
                     this.props.navigation.navigate("SignIn")
                 }}>
-                    <Text style = {styles.buttonText}>Already Registered? Sign in here</Text>
+                    <Text style = {styles.buttonText}>Already Registered? Login</Text>
                     <AntDesign name="leftcircle" size={RFValue(40)} color="#black" />
                 </TouchableOpacity>
             </View>
@@ -134,6 +139,17 @@ const styles = StyleSheet.create({
         marginTop:RFValue(20),
         borderRadius:RFValue(5),
     },
+    button2 : {
+        backgroundColor :'#00adb5',
+        borderWidth : RFValue(2),
+        borderColor : '#fff',
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginTop : RFValue(20),
+        borderRadius : RFValue(20),
+        width : RFValue(250),
+        height: RFValue(40),
+    },
     buttonText:{
         fontWeight:'bold',
         color:"#fff",
@@ -146,7 +162,6 @@ const styles = StyleSheet.create({
         borderRadius:RFValue(5),
         borderWidth:RFValue(2),
         width:RFValue(300),
-        height:RFValue(50),
         marginTop:RFValue(20),
         alignSelf:'center',
     },
@@ -154,5 +169,13 @@ const styles = StyleSheet.create({
         flex:0.1,
         marginTop : -15,
         width : RFValue(500)
+    },
+    emailIcon : {
+        marginLeft : RFValue(0),
+        marginRight : RFValue(5)
+    },
+    passwordIcon : {
+        marginLeft: RFValue(3),
+        marginRight : RFValue(5)
     },
 })

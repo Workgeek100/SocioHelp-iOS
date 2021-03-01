@@ -10,13 +10,12 @@ import {
   Alert,
   ScrollView
 } from "react-native";
-import { Badge, Icon, Header } from "react-native-elements";
+import { Badge, Icon, Header, ListItem} from "react-native-elements";
 import firebase from "firebase";
 import db from "../config";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Dropdown } from "react-native-material-dropdown";
 import { FontAwesome } from "@expo/vector-icons";
-import { ListItem, Item } from "react-native-elements";
 import PostYourTopicScreen from "./PostYourTopicScreen";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -35,7 +34,7 @@ export default class DrivingLicenseScreen extends React.Component {
       .collection("license_blogs")
       .where("category", "==", this.state.category)
       .onSnapshot(snapshot => {
-        var licenseBlogs = snapshot.docs.map(document => document.data);
+        var licenseBlogs = snapshot.docs.map(document => document.data());
         this.setState({
           licenseBlogs: licenseBlogs
         });
@@ -47,9 +46,10 @@ export default class DrivingLicenseScreen extends React.Component {
   renderItem = ({ item, i }) => (
     <ListItem
       key={i}
-      title={item.category}
-      subtitle={item.subject}
+      title={item.topic}
+      subtitle={item.matter}
       titleStyle={styles.titleStyle}
+      containerStyle = {styles.list}
       rightElement={
         <TouchableOpacity>
           <AntDesign name="right" size={24} color="black" />
@@ -83,7 +83,7 @@ export default class DrivingLicenseScreen extends React.Component {
             }
           }}
         />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.88, borderWidth:2 }}>
           {this.state.licenseBlogs.length === 0 ? (
             <View>
               <Text style={styles.buttonText}>No Blogs Available</Text>
@@ -146,5 +146,12 @@ const styles = StyleSheet.create({
     flex: 0.08,
     width: RFValue(500)
   },
-  titleStyle: {}
+  titleStyle: {
+    fontSize: RFValue(20),
+    textAlign: "center"
+  },
+  list : {
+    alignSelf : 'center',
+    width : RFValue(350),
+  }
 });

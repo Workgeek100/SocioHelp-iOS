@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {TouchableOpacity, Text, View, TextInput,KeyboardAvoidingView, StyleSheet, FlatList, Image, ScrollView, SafeAreaView} from 'react-native';
-import {Badge, Icon, Header} from 'react-native-elements';
+import {Badge, Icon, Header, ListItem, Input} from 'react-native-elements';
+import { Dropdown } from 'react-native-material-dropdown';
 import firebase from 'firebase';
 import db from '../config';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -17,12 +18,22 @@ var logo9 = require("../assets/film.png")
 var logo10 = require("../assets/sports.png")
 var logo11 = require("../assets/electronics.png")
 var logo12 = require("../assets/food.png")
+var logo13 = require('../assets/medical.png');
 
 export default class ForumScreen extends React.Component {
+constructor(){
+    super()
+    this.state = {
+        category : 'All',
+        allBlogs : [],
+    }
+    this.blogRef = null;
+}
+
     render(){
         return(
             <KeyboardAvoidingView style = {styles.container} behavior = 'padding' enabled>
-                <ScrollView style = {styles.scrollView}>
+                <ScrollView style = {styles.list}>
                 <Header 
                 backgroundColor = {"#00adb5"}
                 containerStyle = {styles.header}
@@ -44,17 +55,6 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button1}
                 onPress={()=>{
-                    this.props.navigation.navigate("DrivingLicense")
-                }}>
-                    <Text style = {styles.buttonText}>Driving License</Text>
-                    <Image 
-                    source = {logo2}
-                    style = {styles.drivingLicenseImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                style = {styles.button1}
-                onPress={()=>{
                     this.props.navigation.navigate("AadharCard")
                 }}>
                     <Text style = {styles.buttonText}>AADHAR Card</Text>
@@ -64,61 +64,51 @@ export default class ForumScreen extends React.Component {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
+                style = {styles.button16}
+                onPress={()=>{
+                    this.props.navigation.navigate("DrivingLicense")
+                }}>
+                    <Text style = {styles.buttonText}>Driving License</Text>
+                    <Image 
+                    source = {logo2}
+                    style = {styles.drivingLicenseImage}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
                 style ={styles.button10}
                 onPress={()=>{
-                    this.props.navigation.navigate("PanCard")
+                    this.props.navigation.navigate("Education")
                 }}>
-                    <Text style = {styles.buttonText}>PAN Card</Text>
+                    <Text style = {styles.buttonText}>Education</Text>
                     <Image
-                    source = {logo3}
-                    style = {styles.panCardImage}
+                    source = {logo6}
+                    style = {styles.educationImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
                 style = {styles.button2}
                 onPress={()=>{
-                    this.props.navigation.navigate("Passport")
+                    this.props.navigation.navigate("Automobiles")
                 }}>
-                    <Text style = {styles.buttonText}>Passport</Text>
+                    <Text style = {styles.buttonText}>Automobiles</Text>
                     <Image 
-                    source={logo5}
-                    style = {styles.passportImage}
+                    source={logo7}
+                    style = {styles.automobilesImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
                 style = {styles.button8}
                 onPress={()=>{
-                    this.props.navigation.navigate("Education")
+                    this.props.navigation.navigate("Electronics")
                 }}>
-                    <Text style = {styles.buttonText}>Education</Text>
+                    <Text style = {styles.buttonText}>Electronics</Text>
                     <Image 
-                    source = {logo6}
+                    source = {logo11}
+                    style = {styles.eImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
                 style = {styles.button9}
-                onPress={()=>{
-                    this.props.navigation.navigate("Automobiles")
-                }}>
-                    <Text style = {styles.buttonText}>Automobiles</Text>
-                    <Image 
-                    source = {logo7}
-                    style = {styles.automobilesImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                style = {styles.button11}
-                onPress={()=>{
-                    this.props.navigation.navigate("Travel")
-                }}>
-                    <Text style = {styles.buttonText}>Travel & Tourism</Text>
-                    <Image 
-                    source = {logo8}
-                    style = {styles.travelImage}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity
-                style = {styles.button12}
                 onPress={()=>{
                     this.props.navigation.navigate("Film")
                 }}>
@@ -126,6 +116,39 @@ export default class ForumScreen extends React.Component {
                     <Image 
                     source = {logo9}
                     style = {styles.filmImage}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                style = {styles.button11}
+                onPress={()=>{
+                    this.props.navigation.navigate("Food")
+                }}>
+                     <Text style = {{fontWeight:'bold',color:"#fff",fontSize:RFValue(15),fontStyle:'italic',alignItems:'center',}}>Food & Dine-out</Text>
+                    <Image 
+                    source = {logo12}
+                    style = {styles.foodImage}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                style = {styles.button17}
+                onPress={()=>{
+                    this.props.navigation.navigate("Medical")
+                }}>
+                    <Text style = {styles.buttonText}>Medical</Text>
+                    <Image 
+                    source = {logo13}
+                    style = {styles.medicalImage}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                style = {styles.button12}
+                onPress={()=>{
+                    this.props.navigation.navigate("PanCard")
+                }}>
+                    <Text style = {styles.buttonText}>PAN Card</Text>
+                    <Image 
+                    source = {logo3}
+                    style = {styles.panCardImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -142,12 +165,12 @@ export default class ForumScreen extends React.Component {
                 <TouchableOpacity
                 style = {styles.button14}
                 onPress={()=>{
-                    this.props.navigation.navigate("Electronics")
+                    this.props.navigation.navigate("Passport")
                 }}>
-                    <Text style = {styles.buttonText}>Electronics</Text>
+                    <Text style = {styles.buttonText}>Passport</Text>
                     <Image 
-                    source = {logo11}
-                    style = {styles.eImage}
+                    source = {logo5}
+                    style = {styles.passportImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -155,10 +178,10 @@ export default class ForumScreen extends React.Component {
                 onPress={()=>{
                     this.props.navigation.navigate("Food")
                 }}>
-                    <Text style = {{fontWeight:'bold',color:"#fff",fontSize:RFValue(15),fontStyle:'italic',alignItems:'center',}}>Food & Dine-out</Text>
+                    <Text style = {styles.buttonText}>Travel & Tourism</Text>
                     <Image 
-                    source = {logo12}
-                    style = {styles.foodImage}
+                    source = {logo8}
+                    style = {styles.travelImage}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -187,6 +210,7 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:"#222831",
         alignItems:'center',
+        marginTop : RFValue(-15),
     },
     button1 : {
         backgroundColor : "#00adb5",
@@ -198,6 +222,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop : RFValue(20),
         borderRadius:RFValue(5),
+        height : RFValue(110),
     },
     button2 : {
         backgroundColor : "#00adb5",
@@ -207,8 +232,9 @@ const styles = StyleSheet.create({
         width:RFValue(150),
         justifyContent:'center',
         alignItems:'center',
-        marginTop:RFValue(-243),
+        marginTop:RFValue(-249),
         borderRadius:RFValue(5),
+        height : RFValue(110),
     },
     button3 : {
         backgroundColor : "#00adb5",
@@ -272,8 +298,9 @@ const styles = StyleSheet.create({
         width:RFValue(150),
         justifyContent:'center',
         alignItems:'center',
-        marginTop : RFValue(140),
+        marginTop : RFValue(160),
         borderRadius:RFValue(5),
+        height : RFValue(120),
     },
     button9 : {
         backgroundColor : "#00adb5",
@@ -281,10 +308,10 @@ const styles = StyleSheet.create({
         marginLeft : RFValue(180),
         borderColor:"#fff",
         width:RFValue(150),
-        height:RFValue(187),
+        height:RFValue(120),
         justifyContent:'center',
         alignItems:'center',
-        marginTop : RFValue(-187),
+        marginTop : RFValue(-120),
         borderRadius:RFValue(5),
     },
     button10 : {
@@ -294,9 +321,10 @@ const styles = StyleSheet.create({
         marginLeft : RFValue(180),
         justifyContent:'center',
         alignItems:'center',
-        marginTop:RFValue(-97),
+        marginTop:RFValue(-120),
         borderRadius:RFValue(5),
         width:RFValue(150),
+        height : RFValue(120),
     },
     button11 : {
         backgroundColor : "#00adb5",
@@ -316,10 +344,11 @@ const styles = StyleSheet.create({
         marginLeft : RFValue(15),
         justifyContent:'center',
         alignItems:'center',
-        marginTop:RFValue(-200),
+        marginTop:RFValue(20),
         borderRadius:RFValue(5),
-        marginLeft:RFValue(180),
+        marginLeft:RFValue(15),
         width:RFValue(150),
+        height : RFValue(100),
     },
     button13 : {
         backgroundColor : "#00adb5",
@@ -332,19 +361,19 @@ const styles = StyleSheet.create({
         borderRadius:RFValue(5),
         marginLeft:RFValue(15),
         width:RFValue(150),
+        height:RFValue(130),
     },
     button14 : {
         backgroundColor : "#00adb5",
         borderWidth:RFValue(2),
         borderColor:"#fff",
-        marginLeft : RFValue(15),
         justifyContent:'center',
         alignItems:'center',
-        marginTop:RFValue(-110),
+        marginTop:RFValue(-248),
         borderRadius:RFValue(5),
         marginLeft:RFValue(180),
         width:RFValue(150),
-        height:RFValue(110),
+        height:RFValue(100),
     },
     button15 : {
         backgroundColor : "#00adb5",
@@ -354,7 +383,34 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginTop:RFValue(20),
         borderRadius:RFValue(5),
-        alignSelf:'center',
+        marginLeft : RFValue(180),
+        width : RFValue(150),
+        height : RFValue(130),
+    },
+    button16 : {
+        backgroundColor : "#00adb5",
+        marginLeft : RFValue(13),
+        borderWidth:RFValue(2),
+        borderColor:"#fff",
+        width:RFValue(150),
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop : RFValue(20),
+        borderRadius:RFValue(5),
+        height : RFValue(120),
+    },
+    button17 : {
+        backgroundColor : "#00adb5",
+        borderWidth:RFValue(2),
+        borderColor:"#fff",
+        marginLeft : RFValue(15),
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:RFValue(-100),
+        borderRadius:RFValue(5),
+        marginLeft:RFValue(180),
+        width:RFValue(150),
+        height : RFValue(100),
     },
     buttonText:{
         fontWeight:'bold',
@@ -377,12 +433,12 @@ const styles = StyleSheet.create({
         width:RFValue(345)
     },
     shareYourProblemImage:{
-        width:RFValue(150),
-        height:RFValue(180)
+        width:RFValue(100),
+        height:RFValue(120)
     },
     drivingLicenseImage : {
-        width:RFValue(150),
-        height:RFValue(100),
+        width:RFValue(120),
+        height:RFValue(80),
     },
     panCardImage : {
         width:RFValue(100),
@@ -393,35 +449,59 @@ const styles = StyleSheet.create({
         height:RFValue(70),
     },
     passportImage : {
-        width:RFValue(100),
-        height:RFValue(100),
+        width:RFValue(80),
+        height:RFValue(80),
     },
     scrollView: {
         marginTop:RFValue(-15),
         backgroundColor: '#222831',      
     },
     automobilesImage : {
-        width:170,
-        height:170,
+        width:RFValue(80),
+        height:RFValue(80),
     },
     travelImage : {
-        width:200,
-        height:180,
+        width:RFValue(100),
+        height:RFValue(80),
     },
     filmImage:{
-        width:160,
-        height:180,
+        width:RFValue(55),
+        height:RFValue(60),
     },
     sportsImage : {
-        width:200,
-        height:100,
+        width:RFValue(150),
+        height:RFValue(100),
     },
     eImage : {
-        width:170,
-        height:90,
+        width:RFValue(120),
+        height:RFValue(60),
     },
     foodImage : {
-        width:200,
-        height:160,
+        width:RFValue(100),
+        height:RFValue(80),
+    },
+    dropdown : {
+        marginTop:RFValue(10),
+        marginLeft : RFValue(12),
+        width:RFValue(320),
+        backgroundColor : '#00adb5',
+        borderColor : '#fff',
+        borderRadius:RFValue(5)
+    },
+    titleStyle: {
+        fontSize: RFValue(25),
+        textAlign: "center"
+      },
+    list : {
+        alignSelf : 'center',
+        width : RFValue(350),
+    },
+    educationImage : {
+        width : RFValue(100),
+        height : RFValue(100),
+    },
+    medicalImage : {
+        width : RFValue(80),
+        height : RFValue(80),
     },
 })

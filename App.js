@@ -27,7 +27,10 @@ import ElectronicsScreen from "./screens/ElectronicsScreen";
 import FoodScreen from "./screens/FoodScreen";
 import IntroScreen from "./screens/IntroScreen";
 import EnterScreen from "./screens/EnterScreen";
-import DataScreen from "./screens/DataScreen";
+import AadharDataScreen from "./screens/AadharDataScreen";
+import UserForgotPassword from "./screens/UserForgotPasswordScreen";
+import MedicalScreen from './screens/MedicalScreen';
+import AutomobilesDataScreen from "./screens/AutomobilesDataScreen";
 
 export default class App extends React.Component {
   render() {
@@ -45,9 +48,11 @@ const AppNavigator = createSwitchNavigator({
   Enter: { screen: EnterScreen },
   SignIn: { screen: SignInScreen },
   SignUp: { screen: SignUpScreen },
+  ForgotPassword : {screen : UserForgotPassword},
   Forum: { screen: ForumScreen },
   PostYourTopic: { screen: PostYourTopicScreen },
   DrivingLicense: { screen: DrivingLicenseScreen },
+  Medical : {screen : MedicalScreen},
   Passport: { screen: PassportScreen },
   PanCard: { screen: PanCardScreen },
   AadharCard: { screen: AadharCardScreen },
@@ -59,7 +64,8 @@ const AppNavigator = createSwitchNavigator({
   Sports: { screen: SportsScreen },
   Electronics: { screen: ElectronicsScreen },
   Food: { screen: FoodScreen },
-  Data: {screen : DataScreen},
+  AadharData: {screen : AadharDataScreen},
+  AutomobilesData : {screen : AutomobilesDataScreen},
 });
 
 const AppContainer = createAppContainer(AppNavigator);

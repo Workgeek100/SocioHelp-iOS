@@ -34,7 +34,7 @@ export default class DrivingLicenseScreen extends React.Component {
       .collection("education_blogs")
       .where("category", "==", this.state.category)
       .onSnapshot(snapshot => {
-        var eduBlogs = snapshot.docs.map(document => document.data);
+        var eduBlogs = snapshot.docs.map(document => document.data());
         this.setState({
           eduBlogs: eduBlogs
         });
@@ -46,9 +46,10 @@ export default class DrivingLicenseScreen extends React.Component {
   renderItem = ({ item, i }) => (
     <ListItem
       key={i}
-      title={item.category}
-      subtitle={item.subject}
+      title={item.topic}
+      subtitle={item.matter}
       titleStyle={styles.titleStyle}
+      containerStyle = {styles.list}
       bottomDivider
     />
   );
@@ -104,8 +105,8 @@ export default class DrivingLicenseScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#222831"
-    // alignItems: "center"
+    backgroundColor: "#222831",
+    alignItems: "center"
   },
   button: {
     backgroundColor: "#00adb5",
@@ -137,5 +138,12 @@ const styles = StyleSheet.create({
     flex: 0.08,
     width: RFValue(500)
   },
-  titleStyle: {}
+  titleStyle: {
+    fontSize: RFValue(20),
+    textAlign: "center"
+  },
+  list : {
+    alignSelf : 'center',
+    width : RFValue(350),
+  }
 });

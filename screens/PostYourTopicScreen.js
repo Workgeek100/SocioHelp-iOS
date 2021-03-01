@@ -7,7 +7,6 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import { Dropdown } from 'react-native-material-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class PostYourTopicScreen extends React.Component {
 constructor(){
@@ -32,10 +31,22 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
     else if(this.state.category==="PAN Card"){
         db.collection("pan_card_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             topic : this.state.topic,
@@ -50,10 +61,22 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
     else if(this.state.category==="Passport"){
         db.collection("passport_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             topic : this.state.topic,
@@ -68,10 +91,37 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Electronics"){
+        db.collection("e_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
     else if(this.state.category==="Automobiles"){
         db.collection("automobiles_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             topic : this.state.topic,
@@ -86,10 +136,37 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
     else if(this.state.category==="Film & Entertainment"){
         db.collection("film_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        return Alert.alert("Your matter has been submitted. Stay tuned for replies")
+    }
+    else if(this.state.category==="Medical"){
+        db.collection("medical_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             topic : this.state.topic,
@@ -104,10 +181,22 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
     else if(this.state.category==="Food & Dine-out"){
         db.collection("food_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
+        db.collection("all_blogs").add({
             user_name : this.state.userName,
             category : this.state.category,
             topic : this.state.topic,
@@ -122,6 +211,12 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
             topic : this.state.topic,
             matter : this.state.matter,
         })
+        db.collection("all_blogs").add({
+            user_name : this.state.userName,
+            category : this.state.category,
+            topic : this.state.topic,
+            matter : this.state.matter,
+        })
         return Alert.alert("Your matter has been submitted. Stay tuned for replies")
     }
 }
@@ -129,28 +224,32 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
 
     render(){
         let data = [{
-            value: 'Driving License',
-          }, {
-            value: 'PAN Card',
-          }, {
-            value: 'AADHAR Card',
-          }, {
-              value: "Passport",
-          }, {
-              value: "Education",
-          }, {
-              value: "Automobiles"
-          }, {
-              value: "Travel & Tourism"
-          }, {
-              value: "Film & Entertainment"
-          }, {
-              value: "Sports"
-          }, {
-              value: "Food & Dine-out"
-          }, {
-              value: "Others"
-          }];
+            value : 'AADHAR Card'
+        }, {
+            value : 'Automobiles'
+        }, {
+            value : 'Driving License',
+        }, {
+            value : 'Education'
+        }, {
+            value : 'Electronics'
+        }, {
+            value : 'Film & Entertainment'
+        }, {
+            value : 'Food & Dine-out'
+        }, {
+            value : 'Medical'
+        }, {
+            value : 'PAN Card'
+        }, {
+            value : 'Passport'
+        }, {
+            value : 'Sports'
+        }, {
+            value : 'Travel & Tourism'
+        }, {
+            value : 'Others'
+        }]
         return(
             <View style = {styles.container}>
                  <Header 
@@ -163,13 +262,12 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 />
                 <Text style = {styles.text}>Name</Text>
                 <Input 
-                style = {styles.inputBox}
+                containerStyle = {styles.inputBox}
                 placeholder = {"Your Name*"}
-                placeholderTextColor = {'black'}
+                placeholderTextColor = {'#323232'}
                 clearButtonMode = {"while-editing"}
                 autoCorrect = {false}
                 autoCapitalize = {'words'}
-                leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
                 onChangeText={(text)=>{
                     this.setState({
                         userName:text
@@ -178,9 +276,9 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 />
                 <Text style = {styles.text}>Topic</Text>
                 <Input 
-                style = {styles.inputBox}
+                containerStyle = {styles.inputBox}
                 placeholder = {"Topic*"}
-                placeholderTextColor = {'black'}
+                placeholderTextColor = {'#323232'}
                 clearButtonMode = {"while-editing"}
                 autoCorrect = {true}
                 autoCapitalize = {'sentences'}
@@ -192,9 +290,9 @@ submitIntoSeparateCollection = (userName,topic,matter,category)=>{
                 />
                 <Text style = {styles.text}>Matter</Text>
                 <Input 
-                style = {styles.inputBox2}
+                containerStyle = {styles.inputBox2}
                 placeholder = {"Matter*"}
-                placeholderTextColor = {'black'}
+                placeholderTextColor = {'#323232'}
                 clearButtonMode = {"while-editing"}
                 autoCorrect = {true}
                 multiline = {true}
@@ -273,7 +371,6 @@ const styles = StyleSheet.create({
         borderRadius:RFValue(5),
         borderWidth:RFValue(2),
         width:RFValue(300),
-        height:RFValue(50),
         marginTop:RFValue(5),
     },
     inputBox2:{

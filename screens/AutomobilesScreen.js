@@ -1,22 +1,11 @@
 import * as React from "react";
-import {
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput,
-  StyleSheet,
-  FlatList,
-  Image,
-  Alert,
-  ScrollView
-} from "react-native";
-import { Badge, Icon, Header } from "react-native-elements";
+import {TouchableOpacity,Text,View,TextInput,StyleSheet,FlatList,ImageAlert,ScrollView} from "react-native";
+import { Badge, Icon, Header, ListItem} from "react-native-elements";
 import firebase from "firebase";
 import db from "../config";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Dropdown } from "react-native-material-dropdown";
 import { FontAwesome } from "@expo/vector-icons";
-import { ListItem, Item } from "react-native-elements";
 import PostYourTopicScreen from "./PostYourTopicScreen";
 
 export default class DrivingLicenseScreen extends React.Component {
@@ -34,7 +23,7 @@ export default class DrivingLicenseScreen extends React.Component {
       .collection("automobiles_blogs")
       .where("category", "==", this.state.category)
       .onSnapshot(snapshot => {
-        var automobileBlogs = snapshot.docs.map(document => document.data);
+        var automobileBlogs = snapshot.docs.map(document => document.data());
         this.setState({
           automobileBlogs: automobileBlogs
         });
@@ -43,15 +32,22 @@ export default class DrivingLicenseScreen extends React.Component {
 
   keyExtractor = (item, index) => index.toString();
 
-  renderItem = ({ item, i }) => (
-    <ListItem
+  renderItem=({item,i})=>{
+      <TouchableOpacity 
+    onPress={()=>{
+      this.props.navigation.navigate("AutomobilesData",{data:item})
+    }}>
+      <ListItem 
       key={i}
-      title={item.category}
-      subtitle={item.subject}
+      title={item.topic}
+      subtitle={item.matter .split('').splice(0,100).join('') + '.....'} 
       titleStyle={styles.titleStyle}
+      containerStyle = {styles.list}
       bottomDivider
-    />
-  );
+      />
+      </TouchableOpacity>
+    }
+  
 
   componentDidMount() {
     this.getAllBlogs();
@@ -74,7 +70,7 @@ export default class DrivingLicenseScreen extends React.Component {
             }
           }}
         />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.88, borderWidth:2 }}>
           {this.state.automobileBlogs.length === 0 ? (
             <View>
               <Text style={styles.buttonText}>No Blogs Available</Text>
@@ -137,5 +133,12 @@ const styles = StyleSheet.create({
     flex: 0.08,
     width: RFValue(500)
   },
-  titleStyle: {}
+  titleStyle: {
+    fontSize: RFValue(20),
+    textAlign: "center"
+  },
+  list : {
+    alignSelf : 'center',
+    width : RFValue(350),
+  }
 });

@@ -14,7 +14,7 @@ import firebase from "firebase";
 import db from "../config";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Dropdown } from "react-native-material-dropdown";
-import LottieView from "lottie-react-native";
+import LottieView from "lottie-react-native"; 
 var logo = require("../assets/animation.json");
 
 export default class IntroScreen extends React.Component {
